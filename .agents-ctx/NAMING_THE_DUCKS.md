@@ -6,27 +6,26 @@ should say "the project" rather than hardcoding one of these --
 reach for a specific name only when the distinction actually
 matters (e.g. citing a package, an import, or a repository URL).
 
-## Distribution / PyPI name: `ansible-pylibssh`
+## Distribution / PyPI name: `cheroot`
 
 The installable, published name -- recorded in
 `pyproject.toml`'s `[project].name` per PEP 621. This is also
-the preferred way to refer to the project by name in prose.
+the preferred way to refer to the project by name in prose,
+capitalized as "Cheroot" at the start of a sentence.
 
-## Python import name: `pylibsshext`
+## Python import name: `cheroot`
 
-`import pylibsshext` is what code actually imports.
-Long-standing and unlikely to change without a dedicated,
-long-term migration effort -- don't "fix" it opportunistically.
+The same as the distribution name. The test suite ships inside
+it, as `cheroot.test`.
 
-## GitHub repository slug: `ansible/pylibssh`
+## GitHub repository slug: `cherrypy/cheroot`
 
-Close to, but not the same as, the distribution name above. Use
-it verbatim when it's actually the repository being referenced
-(URLs, `gh` invocations, PR/issue citations) -- not as a
-stand-in for the project's name in prose.
+Use it verbatim when it's actually the repository being
+referenced (URLs, `gh` invocations, PR/issue citations) -- not as
+a stand-in for the project's name in prose.
 
-## Don't say bare `pylibssh`
+## Don't confuse it with CherryPy
 
-`pylibssh` on its own is just the default local directory name
-from a `git clone`d checkout -- nothing more. It's a common but
-incorrect shorthand; prefer `ansible-pylibssh` instead.
+Cheroot is the HTTP server that CherryPy, published from
+`cherrypy/cherrypy`, runs on. The two live in separate
+repositories and are released separately. Say which one is meant.

@@ -15,19 +15,21 @@ Read, in this order:
 Here:
 
 1. `pyproject.toml` (build backend and metadata).
-2. `src/pylibsshext/<module>.pyx` and its `.pxd`; libssh
-   declarations live under `src/pylibsshext/includes/`.
-3. `tests/conftest.py` (e.g. the `sshd_addr` fixture), then
-   `tests/unit/<module>_test.py` or `tests/integration/`.
-4. As above.
-5. `.github/workflows/ci-cd.yml`, with the `reusable-*.yml`
-   workflows it calls.
+2. `cheroot/<module>.py` and its `.pyi` stub -- the type
+   annotations live in the stubs, checked against the code by
+   MyPy's `stubtest` (exceptions in `stubtest_allowlist.txt`).
+3. `cheroot/test/conftest.py` and `cheroot/test/_pytest_plugin.py`,
+   plus the helpers in `cheroot/test/helper.py` and
+   `cheroot/test/webtest.py`, then `cheroot/test/test_<module>.py`.
+4. As above, plus `toxfile.py` -- an in-tree tox plugin that
+   installs from the lock files.
+5. `.github/workflows/ci-cd.yml`, which delegates to
+   `tox-dev/workflow`'s `reusable-tox.yml`.
 
 Other places worth knowing:
 
-- `packaging/pep517_backend/` -- the in-tree PEP 517 build backend.
-- `packaging/rpm/` -- RPM packaging, used by `.packit.yml`.
-- `build-scripts/manylinux-container-image/` -- the manylinux
-  images wheels are built in.
+- `dependencies/` -- direct dependencies per tox env, and the
+  pinned lock files generated from them.
 - `docs/` -- Sphinx docs (RST); change notes go under
-  `docs/changelog-fragments/`.
+  `docs/changelog-fragments.d/`, and `CHANGES.rst` is generated
+  from them.

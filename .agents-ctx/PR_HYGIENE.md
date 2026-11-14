@@ -10,8 +10,9 @@ Route contributors to the project's contributing guidelines and
 code of conduct for the canonical contribution process, rather
 than improvising or restating it secondhand.
 
-Here: <https://ansible-pylibssh.rtfd.io/en/latest/contributing/guidelines>
-and `.github/CODE_OF_CONDUCT.rst`.
+Here: <https://cheroot.cherrypy.dev/en/latest/contributing/guidelines/>
+(linked from `.github/CONTRIBUTING.md`) and
+`.github/CODE_OF_CONDUCT.md`.
 
 ## Keep PRs and commits atomic and scoped
 
@@ -92,7 +93,10 @@ token generator using an LLM to sound convincing." (see
 [DONT_GHOST_THE_REVIEWER.md](DONT_GHOST_THE_REVIEWER.md)).
 
 Here: the template is `.github/PULL_REQUEST_TEMPLATE.md`, with
-SUMMARY, ISSUE TYPE, and ADDITIONAL INFORMATION sections.
+"What kind of change does this PR introduce?", "What do these
+changes do?", "Are there changes in behavior for the user?", "Is
+it a substantial burden for the maintainers to support this?",
+"Related issue number", and "Checklist" sections.
 
 ## Brushing up a branch before merge
 
@@ -146,12 +150,12 @@ Recurring, specific review feedback:
   silly. Disclose agent involvement in the PR instead.
 
 Here: fragments are Towncrier-managed RST files in
-`docs/changelog-fragments/`, named `<issue/PR#>.<type>.rst` --
+`docs/changelog-fragments.d/`, named `<issue/PR#>.<type>.rst` --
 or after the commit hash for changes committed straight to the
 default branch -- with `<issue/PR#>.<type>.<n>.rst` for several of
-one type. `docs/changelog-fragments/README.rst` lists the types and
-the full rationale. References use the `sphinx-issues` roles
-(`:pr:`, `:user:`, `:file:`); bylines name people through `:user:`.
+one type. `docs/changelog-fragments.d/README.md` explains the
+rationale, and `towncrier.toml` lists the types. Bylines name
+people through `:user:`.
 
 ## Credit the people whose work you use
 
@@ -209,13 +213,13 @@ an unrelated change -- that's a deliberate, standalone future
 effort, not something to bundle into whatever else a PR is
 doing.
 
-Here: this is a real, acknowledged gap. `.ruff.toml` disables
-`ANN001`/`ANN201`/`ANN202`/`ANN401` with an explicit `# FIXME:
-These flake8-annotations errors need fixing and removal`
-comment, and none of the current test functions in `tests/` are
-annotated. Don't read the absence of annotations in existing
-code as license to skip them in new code -- it's tracked debt,
-not the house style.
+Here: existing modules carry their types in the `.pyi` stub next
+to them, which MyPy's `stubtest` checks against the code. Inline
+annotations are a real, acknowledged gap: `.flake8` disables the
+`ANN*` codes under an explicit `# FIXME: These
+flake8-annotations errors need fixing and removal` comment. Don't
+read that as license to skip annotations in new code -- add them,
+and keep the module's stub in sync when it has one.
 
 ## Common micro-conventions flagged in review
 
